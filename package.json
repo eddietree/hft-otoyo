@@ -1,0 +1,15 @@
+{
+  "name": "OTOYO",
+  "description": "Jam with best friends only, no substitutes.",
+  "version": "0.0.1",
+  "private": false,
+  "dependencies": {
+  },
+  "happyFunTimes": {
+    "gameId": "otoyo",
+    "category": "example",
+    "apiVersion": "0.0.0",
+    "gameType": "html",
+    "minPlayers": 1
+  }
+}

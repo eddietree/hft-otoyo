@@ -1,0 +1,117 @@
+html, body {
+    margin: 0;
+    padding: 0;
+}
+
+body
+{
+    background-color: #F8CC8A;
+    border-top: 1em solid #FFA100;
+    border-bottom: 1em solid #FFA100;
+}
+
+/************ BASSIST ***********/
+#bassist
+{
+    display: none;
+}
+
+ul#bassist-buttons
+{
+    list-style: none;
+    margin: 0 auto;
+    padding: 2em 0;
+    width: 70%;
+}
+
+.bassist-button
+{
+    color: white;
+    text-align: center;
+    background-color: #018A8B;
+    border-bottom: 10px solid #1D0B31;
+    padding: 1em;
+    margin-bottom: 2em;
+}
+
+.bassist-button:hover
+{
+    background-color: #FFA100;
+}
+
+.bassist-button:active
+{
+    background-color: #15305D;
+    border-top: 10px solid #15305D;
+    border-bottom: 0px;
+}
+
+/************ DRUMMER ***********/
+#drummer
+{
+    display: none;
+}
+
+ul#drummer-buttons
+{
+    display: block;
+    list-style: none;
+    margin: 0 auto;
+    
+    height: 100%;
+    width: 100%;
+}
+
+.drummer-button
+{
+    float: left;
+    color: white;
+    text-align: center;
+    background-color: #FFA100;
+    border-bottom: 10px solid #1D0B31;
+    
+    width: 25%;
+    margin: 2em 1em;
+
+    padding: 10em 0;
+}
+
+.drummer-button:hover
+{
+    background-color: #F8CC8A;
+}
+
+.drummer-button:active
+{
+    background-color: #1D0B31;
+    border-top: 10px solid #1D0B31;
+    border-bottom: 0px;
+}
+
+/************ SYNTH ***********/
+
+#synth {
+    display: none;
+}
+
+#synth-input-pad {
+    display: block;
+    width: 100%;
+    height: 100%;
+    margin: auto auto;
+    vertical-align: middle;
+    text-align: center;
+}
+
+#synth-input-pad p
+{
+    margin: 0;
+    padding: 0;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%); 
+}
+
+#synth-input-pad:hover {
+    background-color: white;
+}
