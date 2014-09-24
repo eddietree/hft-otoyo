@@ -20,7 +20,6 @@ define([
 
   var audioUtils = new AudioUtils();
   var osc = audioUtils.osc;
-  //var osc = new Oscillator(440, "square");
   osc.setType("triangle");
 
    // envelope

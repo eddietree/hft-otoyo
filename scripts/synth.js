@@ -21,7 +21,7 @@ define([
 
   var audioUtils = new AudioUtils();
   var osc = audioUtils.osc;
-  //var osc = new Oscillator(440, "sine");
+  osc.setType("sine");
 
   // feedback
   var feedbackDelay = new PingPongDelay("8n");

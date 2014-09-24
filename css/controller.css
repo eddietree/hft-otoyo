@@ -70,10 +70,10 @@ ul#drummer-buttons
     background-color: #FFA100;
     border-bottom: 10px solid #1D0B31;
     
-    width: 25%;
+    width: 40%;
     margin: 2em 1em;
 
-    padding: 10em 0;
+    padding: 5em 0;
 }
 
 .drummer-button:hover

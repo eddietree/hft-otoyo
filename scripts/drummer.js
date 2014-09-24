@@ -65,6 +65,7 @@ define([
       new Player("./audio/kick_strong.wav"),
       new Player("./audio/snare.wav"),
       new Player("./audio/snap.wav"),
+      new Player("./audio/chord_nice.wav"),
     ];
 
     for( var i = 0; i < this.samples.length; i+=1)

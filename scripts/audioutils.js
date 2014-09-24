@@ -12,7 +12,7 @@ define([
 
   var AudioUtils = function() {
     this.notes = [
-      [ "D2", "F2", "A2", "E3"],
+      [ "D2", "E2", "F2", "A2",],
       [ "D4", "E4", "F4", "A4", "E5", "F5", "Bb4", "D5", "E5", "F5", "A5", "E6", "F6", "Bb5" ],
     ];
     this.osc = new Oscillator(440, "square");
