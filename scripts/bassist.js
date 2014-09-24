@@ -21,9 +21,10 @@ define([
   var audioUtils = new AudioUtils();
   var osc = audioUtils.osc;
   //var osc = new Oscillator(440, "square");
+  osc.setType("triangle");
 
    // envelope
-  var env = new Envelope(0.5, 0.5, 0.1, 0.5);
+  var env = new Envelope(0.5, 0.5, 0.1, 1.2);
   env.connect(osc.output.gain);
 
   osc.toMaster();

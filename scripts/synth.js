@@ -74,7 +74,7 @@ define([
   };
 
   Synth.prototype.setVolume = function(volume) {
-    var vol = lerp( -100, 0, volume );
+    var vol = lerp( -100, -35, volume );
     osc.setVolume(vol);
   }
 
@@ -85,16 +85,14 @@ define([
   };
 
   Synth.prototype.onTouch = function(position) {
+
     this.volume = 1.0;
-    this.position = position;
-    
-    //osc.setFrequency( 200 + position.x * 300);
-    //console.log(position);
-    //var index = cmd.index;
+    this.position.x = position.x;
+    this.position.y = position.y;
   };
 
   Synth.prototype.update = function() {
-    this.volume = lerp( this.volume, 0.0, 0.05 );
+    this.volume = lerp( this.volume, 0.0, 0.02 );
     this.setVolume(this.volume);
   };
 
@@ -102,6 +100,17 @@ define([
 
     this.time += 1.0/60.0;
 
+    var posX = this.position.x * ctx.canvas.width;
+    var posY = this.position.y * ctx.canvas.height;
+    var minCanvasWidth = Math.min( ctx.canvas.width, ctx.canvas.height );
+
+    var radius = minCanvasWidth * 0.05;// * this.volume;
+
+    ctx.beginPath();
+    ctx.arc(posX, posY, radius, 0, 2 * Math.PI, false );
+    ctx.strokeStyle = 'white';
+    ctx.lineWidth = minCanvasWidth * 0.05 * this.volume * this.volume;
+    ctx.stroke();
   };
 
   return Synth;
