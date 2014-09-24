@@ -1,10 +1,4 @@
-
 "use strict";
-
-// Require will call this with GameServer, GameSupport, and Misc once
-// gameserver.js, gamesupport.js, and misc.js have loaded.
-
-// Start the main app logic.
 
 define([
 	'Tone/source/Oscillator',
