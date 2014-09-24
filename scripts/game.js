@@ -21,7 +21,7 @@ requirejs([
   var ctx = canvas.getContext("2d");
   var globals = {
     itemSize: 15,
-    showFPS: true
+    //showFPS: true
   };
   Misc.applyUrlSettings(globals);
 
