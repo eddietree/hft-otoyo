@@ -38,6 +38,7 @@ ul#bassist-buttons
     border-bottom: 10px solid #1D0B31;
     padding: 1.5em;
     margin: 1em 0;
+    border-radius: 1em;
 }
 
 .bassist-button:hover
@@ -78,6 +79,7 @@ ul#drummer-buttons
 
     color: white;
     text-align: center;
+    border-radius: 1em;
 }
 
 .drummer-button:hover
