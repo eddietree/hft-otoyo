@@ -20,16 +20,6 @@ define([
     'Tone/source/Player',
   ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, Player) {
 
-  var audioUtils = new AudioUtils();
-  var osc = new Oscillator(440, "square");
-
-   // envelope
-  var env = new Envelope(0.5, 0.5, 0.1, 0.5);
-  env.connect(osc.output.gain);
-
-  osc.toMaster();
-  osc.start();
-
   var canvas = document.getElementById("playfield");
   var ctx = canvas.getContext("2d");
 
@@ -66,6 +56,13 @@ define([
   // The player disconnected.
   Drummer.prototype.disconnect = function() {
     this.gameState.onDisconnect(this);
+  };
+
+  Drummer.prototype.release = function() {
+    for( var i = 0; i < this.samples.length; i+=1)
+    {
+      this.samples[i].stop();
+    }
   };
 
   Drummer.prototype.onHit = function(cmd) {
