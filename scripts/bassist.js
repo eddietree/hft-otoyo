@@ -78,11 +78,14 @@ define([
   Bassist.prototype.onHit = function(cmd) {
 
     var index = cmd.index;
+    var channel = 0;
+    var numNotes = audioUtils.numNotesInChannel(channel);
+
     this.notePulsate[index] = 1.0;
     
     // get freq
-    var note = audioUtils.getNote(0, index);
-    var freq = audioUtils.getFreq(0, index);
+    var note = audioUtils.getNote(channel, numNotes - index - 1);
+    var freq = audioUtils.getFreq(channel, numNotes - index - 1);
 
     // play the note    
     osc.setFrequency( freq );
