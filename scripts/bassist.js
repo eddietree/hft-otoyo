@@ -70,6 +70,12 @@ define([
   // The player disconnected.
   Bassist.prototype.disconnect = function() {
     this.gameState.onDisconnect(this);
+    this.release();
+  };
+
+  Bassist.prototype.release = function() {
+    osc.stop();
+    osc.dispose();
   };
 
   Bassist.prototype.onHit = function(cmd) {

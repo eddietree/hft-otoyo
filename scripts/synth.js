@@ -172,14 +172,16 @@ define([
 
   // The player disconnected.
   Synth.prototype.disconnect = function() {
-    osc.stop();
     this.gameState.onDisconnect(this);
+    this.release();
+  };
+
+  Synth.prototype.release = function() {
+    osc.stop();
+    osc.dispose();
   };
 
   Synth.prototype.onTouch = function(position) {
-
-    //console.log(position);
-
     if ( this.emitTimer <= 0.0 )
     {
       this.emitTimer = 0.02;

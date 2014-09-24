@@ -56,12 +56,14 @@ define([
   // The player disconnected.
   Drummer.prototype.disconnect = function() {
     this.gameState.onDisconnect(this);
+    this.release();
   };
 
   Drummer.prototype.release = function() {
     for( var i = 0; i < this.samples.length; i+=1)
     {
       this.samples[i].stop();
+      this.samples[i].dispose();
     }
   };
 
