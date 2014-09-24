@@ -21,7 +21,6 @@ define([
 
   var audioUtils = new AudioUtils();
   var osc = audioUtils.osc;
-  osc.setType("sine");
 
   // feedback
   var feedbackDelay = new PingPongDelay("8n");
@@ -30,11 +29,7 @@ define([
   feedbackDelay.toMaster(); 
   feedbackDelay.setWet(0.5);  
 
-   // envelope
-  //var env = new Envelope(0.5, 0.5, 0.1, 0.5);
-  //env.connect(osc.output.gain);
-
-  //osc.setVolume(-30);
+  osc.setType("sine");
   osc.toMaster();
 
   var canvas = document.getElementById("playfield");
@@ -79,7 +74,6 @@ define([
     netPlayer.addEventListener('disconnect', Synth.prototype.disconnect.bind(this));
     netPlayer.addEventListener('synth-move', Synth.prototype.onTouch.bind(this));
 
-    //Transport.loop = true;
     Transport.setInterval(function(time){
 
       var posYRange = 0.2;

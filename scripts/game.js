@@ -1,12 +1,8 @@
 
 "use strict";
 
-// http://www.colourlovers.com/palette/3462660/They_Stole_The_Moon
+// Color Reference: http://www.colourlovers.com/palette/3462660/They_Stole_The_Moon
 
-// Require will call this with GameServer, GameSupport, and Misc once
-// gameserver.js, gamesupport.js, and misc.js have loaded.
-
-// Start the main app logic.
 requirejs([
     'hft/gameserver',
     'hft/gamesupport',
@@ -16,9 +12,11 @@ requirejs([
     './synth',
   ]
   , function(GameServer, GameSupport, Misc, Bassist, Drummer, Synth) {
+  
   var statusElem = document.getElementById("status");
   var canvas = document.getElementById("playfield");
   var ctx = canvas.getContext("2d");
+
   var globals = {
     itemSize: 15,
     debug: false,
@@ -50,10 +48,11 @@ requirejs([
 
     var players = this.players;
 
-    for (var ii = 0; ii < players.length; ++ii) {
-      var player = players[ii];
+    // remove player from array
+    for (var i = 0; i < players.length; ++i) {
+      var player = players[i];
       if (player === musician) {
-        players.splice(ii, 1);
+        players.splice(i, 1);
         return;
       }
     }
@@ -72,8 +71,8 @@ requirejs([
 
     var roleFound = false;
 
+    // go through each role and see if any is available
     Object.keys(gameState.roles).forEach(function(key) {
-
       // quit if already found
       if ( roleFound ) {
         return;
@@ -100,6 +99,8 @@ requirejs([
   var render = function() {
 
     Misc.resize(canvas);
+
+    // clear screen
     ctx.fillStyle = "#F8CC8A";
     ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
     

@@ -131,25 +131,12 @@ requirejs([
   };
 
   /////////////////////////////////////////////
-  
-  client.addEventListener("bassist", function(event) {
-    console.log("init bassist");
-    initBassist();
-  });
 
-  client.addEventListener("drummer", function(event) {
-    console.log("init drummer");
-    initDrummer();
-  });
+  // init listeners
+  client.addEventListener( "bassist",   function(event) { initBassist(); } );
+  client.addEventListener( "drummer",   function(event) { initDrummer(); } );
+  client.addEventListener( "synth",     function(event) { initSynth(); } );
+  client.addEventListener( "fullroom",  function(event) { initFullroom(); } );
 
-  client.addEventListener("synth", function(event) {
-    console.log("init synth");
-    initSynth();
-  });
-
-  client.addEventListener("fullroom", function(event) {
-    console.log("Full room, sorry");
-    initFullroom();
-  });
 });
 

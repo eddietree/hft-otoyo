@@ -151,7 +151,7 @@ define([
       }
     }
 
-    // snape
+    // snap
     if ( this.notePulsate[2] > 0.01 )
     {
       var alpha = this.notePulsate[2];

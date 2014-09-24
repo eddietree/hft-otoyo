@@ -91,11 +91,8 @@ define([
     // timeout for release
     Transport.setTimeout(function(time){
          env.triggerRelease(1.0);
-    }, 0.1);
+    }, "16n");
     Transport.start();
-
-    console.log("received onHit: " + index);
-    console.log(note);
   };
 
   Bassist.prototype.update = function() {
