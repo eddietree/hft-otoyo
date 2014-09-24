@@ -80,6 +80,7 @@ define([
     this.particles = new Array(numParticles);
     this.particleIndex = 0;
     this.emitTimer = 0.0;
+    this.timeSinceLastTouch = 0.0;
 
     for ( var i = 0; i < this.particles.length; i+=1 )
     {
@@ -189,17 +190,24 @@ define([
       this.emitParticleAt( position.x * ctx.canvas.width, position.y * ctx.canvas.height );
     }
 
-    this.volume = MathUtils.lerp( this.volume, 1.0, 0.2 );
+    this.timeSinceLastTouch = 0.0;
+    this.volume = MathUtils.lerp( this.volume, 1.0, 0.15 );
     this.position.x = position.x;
     this.position.y = position.y;
   };
 
   Synth.prototype.update = function() {
 
+    if ( this.timeSinceLastTouch > 0.1 )
+    {
+      this.volume = MathUtils.lerp( this.volume, 0.0, 0.02 );
+    }
+
     this.time += this.dt;
     this.emitTimer -= this.dt;
+    this.timeSinceLastTouch += this.dt;
     this.updateParticles();
-    this.volume = MathUtils.lerp( this.volume, 0.0, 0.02 );
+    
     this.setVolume(this.volume);
   };
 
