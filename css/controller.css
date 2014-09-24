@@ -139,16 +139,17 @@ ul#drummer-buttons
     padding: 0;
     position: fixed;
     background-color: #018A8B;
-    vertical-align: middle;
     text-align: center;
     color: white;
     top: 50%;
     left: 50%;
-    transform: translateY(-50%) translateX(-50%); 
     font-size: 2em;
     z-index: 2;
     pointer-events: none;
     padding: 0.5em;
+    transform: translateY(-50%) translateX(-50%);
+    -ms-transform: translateY(-50%) translateX(-50%);
+    -webkit-transform: translateY(-50%) translateX(-50%);
 }
 
 #synth-input-pad {
@@ -176,6 +177,8 @@ ul#drummer-buttons
     padding: 0;
     position: relative;
     top: 50%;
-    transform: translateY(-50%); 
+    transform: translateY(-50%);
+    -ms-transform: translateY(-50%);
+    -webkit-transform: translateY(-50%);
     font-size: 2em;
 }
