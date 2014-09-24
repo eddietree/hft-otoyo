@@ -21,6 +21,7 @@ requirejs([
   var ctx = canvas.getContext("2d");
   var globals = {
     itemSize: 15,
+    debug: false,
     //showFPS: true
   };
   Misc.applyUrlSettings(globals);
@@ -42,11 +43,10 @@ requirejs([
   };
 
   GameState.prototype.onDisconnect = function( musician ) {
-    
     var id = musician.id;
     this.roles[id].filled = false;
 
-    console.log("Musician disconnect: " + id);
+    console.log("Musician disconnected: " + id);
 
     var players = this.players;
 
