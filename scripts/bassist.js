@@ -19,7 +19,8 @@ define([
   ], function(GameServer, GameSupport, Misc, AudioUtils, Master, Note, Transport, Oscillator, Envelope) {
 
   var audioUtils = new AudioUtils();
-  var osc = new Oscillator(440, "square");
+  var osc = audioUtils.osc;
+  //var osc = new Oscillator(440, "square");
 
    // envelope
   var env = new Envelope(0.5, 0.5, 0.1, 0.5);
@@ -66,8 +67,8 @@ define([
     this.notePulsate[index] = 1.0;
     
     // get freq
-    var note = audioUtils.getNote(index);
-    var freq = audioUtils.getFreq(index);
+    var note = audioUtils.getNote(0, index);
+    var freq = audioUtils.getFreq(0, index);
 
     // play the note    
     osc.setFrequency( freq );
