@@ -180,6 +180,16 @@ define([
           ctx.stroke();
       }
     }
+
+    // chord_filter
+    if ( this.notePulsate[3] > 0.01 )
+    {
+      var alpha = this.notePulsate[3];
+
+      ctx.strokeStyle = "#15305D";
+      ctx.lineWidth = minCanvasWidth*0.1 * alpha;
+      ctx.strokeRect(0,0, ctx.canvas.width, ctx.canvas.height);
+    }
   };
 
   return Drummer;
