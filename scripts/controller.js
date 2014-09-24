@@ -124,6 +124,13 @@ requirejs([
   };
 
   /////////////////////////////////////////////
+  // full room
+  /////////////////////////////////////////////
+  function initFullroom() {
+    document.getElementById("fullroom").style.display = "block";
+  };
+
+  /////////////////////////////////////////////
   
   client.addEventListener("bassist", function(event) {
     console.log("init bassist");
@@ -138,6 +145,11 @@ requirejs([
   client.addEventListener("synth", function(event) {
     console.log("init synth");
     initSynth();
+  });
+
+  client.addEventListener("fullroom", function(event) {
+    console.log("Full room, sorry");
+    initFullroom();
   });
 });
 

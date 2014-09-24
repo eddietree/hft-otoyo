@@ -91,6 +91,10 @@ requirejs([
       }
     });
 
+    if ( !roleFound ) {
+      netPlayer.sendCmd("fullroom");
+    }
+
   });
 
   var render = function() {
