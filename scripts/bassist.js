@@ -21,27 +21,6 @@ define([
     'Tone/effect/BitCrusher',
   ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, FeedbackDelay, BitCrusher) {
 
-  var osc = new Oscillator(440, "triangle");
-
-/*   // feedback
-  var feedbackDelay = new FeedbackDelay("4n");
-  feedbackDelay.setFeedback(0.7);
-  osc.connect(feedbackDelay);
-  feedbackDelay.toMaster(); 
-  feedbackDelay.setWet(0.5);  */
-
-   // envelope
-  var env = new Envelope(0.2, 0.5, 0.1, 1.5);
-  env.connect(osc.output.gain);
-
-  /*// crusher
-  var crusher = new BitCrusher(5);
-  osc.connect(crusher);
-  crusher.toMaster();*/
-
-  osc.toMaster();
-  osc.start();
-
   var canvas = document.getElementById("playfield");
   var ctx = canvas.getContext("2d");
 
@@ -53,6 +32,15 @@ define([
     this.netPlayer.sendCmd(this.id, {x:1});
     this.name = name;
     this.gameState = gameState;
+
+    this.osc = new Oscillator(440, "triangle");
+
+    // envelope
+    this.env = new Envelope(0.2, 0.5, 0.1, 1.5);
+    this.env.connect(this.osc.output.gain);
+
+    this.osc.toMaster();
+    this.osc.start();
 
     this.numNotes = 4;
     this.notePulsate = new Array(this.numNotes);
@@ -72,8 +60,14 @@ define([
   };
 
   Bassist.prototype.release = function() {
-    osc.stop();
-    osc.dispose();
+
+    this.env.disconnect();
+    this.env.dispose();
+    this.env = null;
+
+    this.osc.stop();
+    this.osc.dispose();
+    this.osc = null;
   };
 
   Bassist.prototype.onHit = function(cmd) {
@@ -89,13 +83,15 @@ define([
     var freq = AudioUtils.getFreq(channel, numNotes - index - 1);
 
     // play the note    
-    osc.setFrequency( freq );
-    env.triggerAttack();
+    this.osc.setFrequency( freq );
+    this.env.triggerAttack();
 
     // timeout for release
     Transport.setTimeout(function(time){
-         env.triggerRelease(1.0);
-    }, "16n");
+        if ( this.env != null ) {
+          this.env.triggerRelease(1.0);
+        }
+    }.bind(this), "16n");
     Transport.start();
   };
 
