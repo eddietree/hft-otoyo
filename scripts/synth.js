@@ -20,23 +20,8 @@ define([
     'Tone/effect/PingPongDelay',
   ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, PingPongDelay) {
 
-  var osc = new Oscillator(440, "sine");
-
-  // feedback
-  var feedbackDelay = new PingPongDelay("8n");
-  feedbackDelay.setFeedback(0.7);
-  osc.connect(feedbackDelay);
-  feedbackDelay.toMaster(); 
-  feedbackDelay.setWet(0.5);  
-
-  osc.toMaster();
-
   var canvas = document.getElementById("playfield");
   var ctx = canvas.getContext("2d");
-
-  ////////////////////////////////
-
-  var g_position;
 
   var Synth = function(netPlayer, name, gameState) {
     this.id = 'synth';
@@ -49,21 +34,30 @@ define([
     this.position = {x:0, y:0};
     this.dt = 1.0 / 60.0;
 
-    g_position = this.position;
+    this.osc = new Oscillator(440, "sine");
 
-    osc.start();
+    // feedback
+    var feedbackDelay = new PingPongDelay("8n");
+    feedbackDelay.setFeedback(0.7);
+    this.osc.connect(feedbackDelay);
+    feedbackDelay.toMaster(); 
+    feedbackDelay.setWet(0.5);  
+
+    this.osc.toMaster();
+    this.osc.start();
+
     this.setVolume(this.volume);
 
     netPlayer.addEventListener('disconnect', Synth.prototype.disconnect.bind(this));
     netPlayer.addEventListener('synth-move', Synth.prototype.onTouch.bind(this));
 
     // schedule to hit a range of notes in scale
-    Transport.setInterval(function(time){
+    this.transportId = Transport.setInterval( function(time) {
 
       var posYRange = 0.2;
       var channel = 1;
 
-      var posY = 1.0 - g_position.y;
+      var posY = 1.0 - this.position.y;
       var posYmin = MathUtils.clamp( posY - posYRange*0.5 ); 
       var posYmax = MathUtils.clamp( posY + posYRange*0.5 ); 
 
@@ -73,8 +67,8 @@ define([
       var noteIndex = MathUtils.randInt( noteMin, noteMax );
 
       var freq = AudioUtils.getFreq( channel, noteIndex );
-      osc.setFrequency(freq);
-    }, "8n");
+      this.osc.setFrequency(freq);
+    }.bind(this), "8n");
 
     Transport.start();
 
@@ -165,18 +159,19 @@ define([
 
   Synth.prototype.setVolume = function(volume) {
     var vol = MathUtils.lerp( -100, -35, volume );
-    osc.setVolume(vol);
+    this.osc.setVolume(vol);
   }
 
   // The player disconnected.
   Synth.prototype.disconnect = function() {
-    this.gameState.onDisconnect(this);
     this.release();
+    this.gameState.onDisconnect(this);
   };
 
   Synth.prototype.release = function() {
-    osc.stop();
-    //osc.dispose();
+    Transport.clearInterval( this.transportId );
+    this.osc.stop();
+    this.osc.dispose();
   };
 
   Synth.prototype.onTouch = function(position) {
