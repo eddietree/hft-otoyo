@@ -193,5 +193,3 @@ define([
   return Drummer;
 
 });
-
-

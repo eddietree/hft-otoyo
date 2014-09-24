@@ -158,5 +158,3 @@ define([
   return Bassist;
 
 });
-
-

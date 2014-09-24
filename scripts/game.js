@@ -112,5 +112,3 @@ requirejs([
   };
   GameSupport.run(globals, render);
 });
-
-

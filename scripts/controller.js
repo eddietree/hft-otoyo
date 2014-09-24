@@ -142,4 +142,3 @@ requirejs([
   client.addEventListener( "fullroom",  function(event) { initFullroom(); } );
 
 });
-

@@ -244,5 +244,3 @@ define([
 
   return Synth;
 });
-
-
