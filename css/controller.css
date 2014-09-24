@@ -62,24 +62,22 @@ ul#drummer-buttons
 {
     display: block;
     list-style: none;
-    margin: 0 auto;
-    
+    margin: 0em;
+
     height: 100%;
     width: 100%;
 }
 
 .drummer-button
 {
-    float: left;
-    color: white;
-    text-align: center;
     background-color: #FFA100;
     border-bottom: 10px solid #1D0B31;
     
-    width: 40%;
-    margin: 2em 1em;
+    width: 35%;
+    height: 35%;
 
-    padding: 5em 0;
+    color: white;
+    text-align: center;
 }
 
 .drummer-button:hover
@@ -92,6 +90,30 @@ ul#drummer-buttons
     background-color: #1D0B31;
     border-top: 10px solid #1D0B31;
     border-bottom: 0px;
+}
+
+.drummer-button-0 {
+    position: absolute;
+    top: 10%;
+    left: 10%;
+}
+
+.drummer-button-1 {
+    position: absolute;
+    top: 10%;
+    right: 10%;
+}
+
+.drummer-button-2 {
+    position: absolute;
+    bottom: 10%;
+    left: 10%;
+}
+
+.drummer-button-3 {
+    position: absolute;
+    bottom: 10%;
+    right: 10%;
 }
 
 /************ SYNTH ***********/
