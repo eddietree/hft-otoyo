@@ -131,28 +131,31 @@ ul#drummer-buttons
 
 #synth {
     display: none;
+      background-image: url('../img/synth-bg.png');
+}
+
+#synth p{
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    background-color: #018A8B;
+    vertical-align: middle;
+    text-align: center;
+    color: white;
+    top: 50%;
+    left: 50%;
+    transform: translateY(-50%) translateX(-50%); 
+    font-size: 2em;
+    z-index: 2;
+    pointer-events: none;
+    padding: 0.5em;
 }
 
 #synth-input-pad {
     display: block;
     width: 100%;
     height: 100%;
-    margin: auto auto;
-    vertical-align: middle;
-    text-align: center;
-    color: white;
-
-    background-image: url('../img/synth-bg.png');
-}
-
-#synth-input-pad p
-{
-    margin: 0;
-    padding: 0;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%); 
-    font-size: 2em;
+    z-index: 99;
 }
 
 /************ FULLROOM ***********/
