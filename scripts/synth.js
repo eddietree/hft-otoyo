@@ -52,7 +52,13 @@ define([
     return min + (max-min)*Math.random();
   };
 
+  var clamp = function( val ) {
+    return Math.min( Math.max( val, 0.0 ), 1.0 );
+  };
+
   ////////////////////////////////
+
+  var g_position;
 
   var Synth = function(netPlayer, name, gameState) {
     this.id = 'synth';
@@ -65,17 +71,30 @@ define([
     this.position = {x:0, y:0};
     this.dt = 1.0 / 60.0;
 
+    g_position = this.position;
+
     osc.start();
     this.setVolume(this.volume);
 
     netPlayer.addEventListener('disconnect', Synth.prototype.disconnect.bind(this));
     netPlayer.addEventListener('synth-move', Synth.prototype.onTouch.bind(this));
 
-    Transport.setLoopEnd("1m");
-    Transport.loop = true;
+    //Transport.loop = true;
     Transport.setInterval(function(time){
-      var index = Math.floor( Math.random() * audioUtils.numNotesInChannel(1) );
-      var freq = audioUtils.getFreq( 1, index );
+
+      var posYRange = 0.2;
+      var channel = 1;
+
+      var posY = 1.0 - g_position.y;
+      var posYmin = clamp( posY - posYRange*0.5 ); 
+      var posYmax = clamp( posY + posYRange*0.5 ); 
+
+      var numNotes = audioUtils.numNotesInChannel(channel);
+      var noteMin = Math.floor( posYmin * numNotes );
+      var noteMax = Math.floor( posYmax * numNotes );
+      var noteIndex = randInt( noteMin, noteMax );
+
+      var freq = audioUtils.getFreq( channel, noteIndex );
       osc.setFrequency(freq);
     }, "8n");
 
@@ -107,9 +126,6 @@ define([
   };
 
   Synth.prototype.emitParticleAt = function(posX, posY) {
-    
-    console.log(posX, posY);
-
     var minCanvasWidth = Math.min( ctx.canvas.width, ctx.canvas.height );
     var angle = randFloat( 0, 2.0 * Math.PI );
     var speed = randFloat( 50, 180 );

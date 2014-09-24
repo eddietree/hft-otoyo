@@ -13,7 +13,7 @@ define([
   var AudioUtils = function() {
     this.notes = [
       [ "D2", "E2", "F2", "A2",],
-      [ "D4", "E4", "F4", "A4", "E5", "F5", "Bb4", "D5", "E5", "F5", "A5", "E6", "F6", "Bb5" ],
+      [ "F5", "Bb4", "D5", "E5", "F5", "A5", "E6", "F6", "Bb5", "D6", "E6", "F6", "A6", "E7",  ],
     ];
     this.osc = new Oscillator(440, "square");
   };
