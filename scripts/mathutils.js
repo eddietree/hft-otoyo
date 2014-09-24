@@ -1,11 +1,9 @@
 "use strict";
 
-
 define([
 
   ], function() {
 
-  
   var lerp = function(start, end, alpha) {
     return start + (end-start) * alpha;
   };
