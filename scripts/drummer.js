@@ -53,13 +53,6 @@ define([
     this.name = name;
     this.gameState = gameState;
 
-    this.numNotes = 3;
-    this.notePulsate = new Array(this.numNotes);
-    this.time = 0.0;
-
-    for ( var i = 0; i < this.notePulsate.length; i+=1 )
-      this.notePulsate[i] = 0.0;
-
     this.samples = 
     [
       new Player("./audio/kick_strong.wav"),
@@ -68,9 +61,14 @@ define([
       new Player("./audio/chord_nice.wav"),
     ];
 
+    this.numNotes = this.samples.length;
+    this.notePulsate = new Array(this.numNotes);
+    this.time = 0.0;
+
     for( var i = 0; i < this.samples.length; i+=1)
     {
       this.samples[i].toMaster();
+      this.notePulsate[i] = 0.0;
     }
 
     netPlayer.addEventListener('disconnect', Drummer.prototype.disconnect.bind(this));
