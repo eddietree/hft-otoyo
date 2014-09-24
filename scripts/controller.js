@@ -58,6 +58,7 @@ requirejs([
     {
       var button = buttons[i];
       button.index = i;
+      button.style.cursor = "pointer";
 
       button.addEventListener("mousedown", function(event) {
         var index = this.index;
@@ -85,6 +86,7 @@ requirejs([
     {
       var button = buttons[i];
       button.index = i;
+      button.style.cursor = "pointer";
 
       button.addEventListener("mousedown", function(event) {
         var index = this.index;
@@ -112,6 +114,7 @@ requirejs([
 
     document.getElementById("synth").style.display = "block";
     var inputElem = document.getElementById("synth-input-pad");
+    inputElem.style.cursor = "pointer";
 
     // Send a message to the game when the screen is touched
     inputElem.addEventListener('pointermove', function(event) {
