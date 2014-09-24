@@ -69,6 +69,13 @@ requirejs([
         console.log("hit bass index: " + index);
       });
     }
+
+     /*setInterval( function() {
+        client.sendCmd('bassist-hit', {
+          index: 1,
+        });
+
+    }, 500);*/
   };
 
   /////////////////////////////////////////////
@@ -97,6 +104,13 @@ requirejs([
         console.log("hit bass index: " + index);
       });
     }
+
+    /*setInterval( function() {
+        client.sendCmd('drummer-hit', {
+          index: 1,
+        });
+
+    }, 500);*/
   };
 
   /////////////////////////////////////////////
