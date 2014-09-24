@@ -21,9 +21,7 @@ define([
     'Tone/effect/BitCrusher',
   ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, FeedbackDelay, BitCrusher) {
 
-  var audioUtils = new AudioUtils();
-  var osc = audioUtils.osc;
-  osc.setType("triangle");
+  var osc = new Oscillator(440, "triangle");
 
 /*   // feedback
   var feedbackDelay = new FeedbackDelay("4n");
@@ -82,13 +80,13 @@ define([
 
     var index = cmd.index;
     var channel = 0;
-    var numNotes = audioUtils.numNotesInChannel(channel);
+    var numNotes = AudioUtils.numNotesInChannel(channel);
 
     this.notePulsate[index] = 1.0;
     
     // get freq
-    var note = audioUtils.getNote(channel, numNotes - index - 1);
-    var freq = audioUtils.getFreq(channel, numNotes - index - 1);
+    var note = AudioUtils.getNote(channel, numNotes - index - 1);
+    var freq = AudioUtils.getFreq(channel, numNotes - index - 1);
 
     // play the note    
     osc.setFrequency( freq );

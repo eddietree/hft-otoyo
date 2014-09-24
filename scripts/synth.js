@@ -20,8 +20,7 @@ define([
     'Tone/effect/PingPongDelay',
   ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, PingPongDelay) {
 
-  var audioUtils = new AudioUtils();
-  var osc = audioUtils.osc;
+  var osc = new Oscillator(440, "sine");
 
   // feedback
   var feedbackDelay = new PingPongDelay("8n");
@@ -30,7 +29,6 @@ define([
   feedbackDelay.toMaster(); 
   feedbackDelay.setWet(0.5);  
 
-  osc.setType("sine");
   osc.toMaster();
 
   var canvas = document.getElementById("playfield");
@@ -69,12 +67,12 @@ define([
       var posYmin = MathUtils.clamp( posY - posYRange*0.5 ); 
       var posYmax = MathUtils.clamp( posY + posYRange*0.5 ); 
 
-      var numNotes = audioUtils.numNotesInChannel(channel);
+      var numNotes = AudioUtils.numNotesInChannel(channel);
       var noteMin = Math.floor( posYmin * numNotes );
       var noteMax = Math.floor( posYmax * numNotes );
       var noteIndex = MathUtils.randInt( noteMin, noteMax );
 
-      var freq = audioUtils.getFreq( channel, noteIndex );
+      var freq = AudioUtils.getFreq( channel, noteIndex );
       osc.setFrequency(freq);
     }, "8n");
 
@@ -178,7 +176,7 @@ define([
 
   Synth.prototype.release = function() {
     osc.stop();
-    osc.dispose();
+    //osc.dispose();
   };
 
   Synth.prototype.onTouch = function(position) {

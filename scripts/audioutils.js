@@ -1,32 +1,33 @@
 "use strict";
 
 define([
-	'Tone/source/Oscillator',
-  ], function( Oscillator ) {
+  'Tone/source/Oscillator',
+	'Tone/core/Tone',
+  ], function( Oscillator, Tone ) {
 
-  var AudioUtils = function() {
-    this.notes = [
+  var notes = [
       [ "D2", "E2", "F2", "A2",],
       [ "F5", "Bb4", "D5", "E5", "F5", "A5", "E6", "F6", "Bb5", "D6", "E6", "F6", "A6", "E7",  ],
-    ];
-    this.osc = new Oscillator(440, "square");
-  };
+  ];
 
-  AudioUtils.prototype.numNotesInChannel = function(channel) {
-    var channelNotes = this.notes[channel];
+  var numNotesInChannel = function(channel) {
+    var channelNotes = notes[channel];
     return channelNotes.length;
   };
 
-  AudioUtils.prototype.getNote = function(channel, index) {
-    var channelNotes = this.notes[channel];
+  var getNote = function(channel, index) {
+    var channelNotes = notes[channel];
   	return channelNotes[index % ( channelNotes.length)];
   };
 
-  AudioUtils.prototype.getFreq = function(channel, index) {
+  var getFreq = function(channel, index) {
   	var note = this.getNote(channel, index);
-  	return this.osc.noteToFrequency(note);
+  	return Tone.prototype.noteToFrequency(note);
   };
 
-  return AudioUtils;
-
+  return {
+    numNotesInChannel:numNotesInChannel, 
+    getNote:getNote, 
+    getFreq:getFreq,
+  };
 });
