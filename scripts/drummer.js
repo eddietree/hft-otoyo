@@ -126,10 +126,11 @@ define([
       var boxMargin = minCanvasWidth*0.1;
       var boxTotalWidth = ctx.canvas.width*0.7;
       var boxTotalHeight = ctx.canvas.height*0.8;
+      var posOffset = (boxMargin+boxDimen) * 0.5;
 
       var currBoxDimen = boxDimen  * (1.0-alpha);
-      var posOffsetX = ctx.canvas.width*0.5 - boxTotalWidth*0.5 - currBoxDimen*0.5 + boxMargin*0.5;
-      var posOffsetY = ctx.canvas.height*0.5 - boxTotalHeight*0.5 - currBoxDimen*0.5;
+      var posOffsetX = ctx.canvas.width*0.5 - boxTotalWidth*0.5 - currBoxDimen*0.5 + posOffset;
+      var posOffsetY = ctx.canvas.height*0.5 - boxTotalHeight*0.5 - currBoxDimen*0.5 + posOffset;
 
       var numBoxX = Math.floor( boxTotalWidth / (boxDimen+boxMargin) );
       var numBoxY = Math.floor( boxTotalHeight / (boxDimen+boxMargin) );
