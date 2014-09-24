@@ -5,6 +5,7 @@ html, body {
 
 body
 {
+    font-family: Georgia, Serif;
     background-color: #F8CC8A;
     border-top: 1em solid #FFA100;
     border-bottom: 1em solid #FFA100;
@@ -110,6 +111,7 @@ ul#drummer-buttons
     position: relative;
     top: 50%;
     transform: translateY(-50%); 
+    font-size: 2em;
 }
 
 #synth-input-pad:hover {
