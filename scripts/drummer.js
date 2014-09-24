@@ -63,7 +63,6 @@ define([
 
     this.numNotes = this.samples.length;
     this.notePulsate = new Array(this.numNotes);
-    this.time = 0.0;
 
     for( var i = 0; i < this.samples.length; i+=1)
     {
@@ -94,8 +93,6 @@ define([
   };
 
   Drummer.prototype.draw = function() {
-
-    this.time += 1.0/60.0;
 
     var centerX = ctx.canvas.width*0.5;
     var centerY = ctx.canvas.height*0.5;

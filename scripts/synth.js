@@ -74,6 +74,7 @@ define([
     netPlayer.addEventListener('disconnect', Synth.prototype.disconnect.bind(this));
     netPlayer.addEventListener('synth-move', Synth.prototype.onTouch.bind(this));
 
+    // schedule to hit a range of notes in scale
     Transport.setInterval(function(time){
 
       var posYRange = 0.2;
@@ -145,6 +146,8 @@ define([
     for ( var i = 0; i < this.particles.length; i+=1 )
     {
       var p = this.particles[i];
+
+      // move it
       p.time += dt;
       p.posX += p.dirX * dt;
       p.posY += p.dirY * dt;
@@ -162,16 +165,15 @@ define([
     for ( var i = 0; i < this.particles.length; i+=1 )
     {
       var p = this.particles[i];
-      
       var alpha = (p.time / p.timeMax);
+
       if ( alpha < 1.0 )
       {
         var radius = lerp( p.radius0, p.radius1, alpha );
-
         var posX = p.posX;
         var posY = p.posY;
-        ctx.beginPath();
 
+        ctx.beginPath();
         ctx.arc(posX, posY, radius, 0, 2 * Math.PI, false );
         ctx.fill();
       }
