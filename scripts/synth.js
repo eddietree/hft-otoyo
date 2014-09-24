@@ -45,7 +45,6 @@ define([
 
     this.osc.toMaster();
     this.osc.start();
-
     this.setVolume(this.volume);
 
     netPlayer.addEventListener('disconnect', Synth.prototype.disconnect.bind(this));
@@ -68,6 +67,7 @@ define([
 
       var freq = AudioUtils.getFreq( channel, noteIndex );
       this.osc.setFrequency(freq);
+
     }.bind(this), "8n");
 
     Transport.start();
@@ -170,8 +170,10 @@ define([
 
   Synth.prototype.release = function() {
     Transport.clearInterval( this.transportId );
+    
     this.osc.stop();
     this.osc.dispose();
+    this.osc = null;
   };
 
   Synth.prototype.onTouch = function(position) {
