@@ -10,6 +10,7 @@ define([
     'hft/gameserver',
     'hft/gamesupport',
     'hft/misc/misc',
+    './mathutils',
     './audioutils',
     'Tone/core/Master',
     'Tone/core/Note',
@@ -18,7 +19,7 @@ define([
     'Tone/component/Envelope',
     'Tone/effect/FeedbackDelay',
     'Tone/effect/BitCrusher',
-  ], function(GameServer, GameSupport, Misc, AudioUtils, Master, Note, Transport, Oscillator, Envelope, FeedbackDelay, BitCrusher) {
+  ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, FeedbackDelay, BitCrusher) {
 
   var audioUtils = new AudioUtils();
   var osc = audioUtils.osc;
@@ -45,10 +46,6 @@ define([
 
   var canvas = document.getElementById("playfield");
   var ctx = canvas.getContext("2d");
-
-  var lerp = function(start, end, alpha) {
-    return start + (end-start) * alpha;
-  };
 
   ////////////////////////////////
 
@@ -100,7 +97,7 @@ define([
 
   Bassist.prototype.update = function() {
      for ( var i = 0; i < this.notePulsate.length; i+=1 )
-        this.notePulsate[i] = lerp( this.notePulsate[i], 0.0, 0.15 );
+        this.notePulsate[i] = MathUtils.lerp( this.notePulsate[i], 0.0, 0.15 );
   };
 
   Bassist.prototype.draw = function() {

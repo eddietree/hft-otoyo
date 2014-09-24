@@ -10,6 +10,7 @@ define([
     'hft/gameserver',
     'hft/gamesupport',
     'hft/misc/misc',
+    './mathutils',
     './audioutils',
     'Tone/core/Master',
     'Tone/core/Note',
@@ -17,7 +18,7 @@ define([
     'Tone/source/Oscillator',
     'Tone/component/Envelope',
     'Tone/effect/PingPongDelay',
-  ], function(GameServer, GameSupport, Misc, AudioUtils, Master, Note, Transport, Oscillator, Envelope, PingPongDelay) {
+  ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, PingPongDelay) {
 
   var audioUtils = new AudioUtils();
   var osc = audioUtils.osc;
@@ -34,22 +35,6 @@ define([
 
   var canvas = document.getElementById("playfield");
   var ctx = canvas.getContext("2d");
-
-  var lerp = function(start, end, alpha) {
-    return start + (end-start) * alpha;
-  };
-
-  var randInt = function( min, max ) {
-    return Math.floor( min + (max-min)*Math.random() );
-  };
-
-  var randFloat = function( min, max ) {
-    return min + (max-min)*Math.random();
-  };
-
-  var clamp = function( val ) {
-    return Math.min( Math.max( val, 0.0 ), 1.0 );
-  };
 
   ////////////////////////////////
 
@@ -81,13 +66,13 @@ define([
       var channel = 1;
 
       var posY = 1.0 - g_position.y;
-      var posYmin = clamp( posY - posYRange*0.5 ); 
-      var posYmax = clamp( posY + posYRange*0.5 ); 
+      var posYmin = MathUtils.clamp( posY - posYRange*0.5 ); 
+      var posYmax = MathUtils.clamp( posY + posYRange*0.5 ); 
 
       var numNotes = audioUtils.numNotesInChannel(channel);
       var noteMin = Math.floor( posYmin * numNotes );
       var noteMax = Math.floor( posYmax * numNotes );
-      var noteIndex = randInt( noteMin, noteMax );
+      var noteIndex = MathUtils.randInt( noteMin, noteMax );
 
       var freq = audioUtils.getFreq( channel, noteIndex );
       osc.setFrequency(freq);
@@ -122,18 +107,18 @@ define([
 
   Synth.prototype.emitParticleAt = function(posX, posY) {
     var minCanvasWidth = Math.min( ctx.canvas.width, ctx.canvas.height );
-    var angle = randFloat( 0, 2.0 * Math.PI );
-    var speed = randFloat( 50, 180 );
+    var angle = MathUtils.randFloat( 0, 2.0 * Math.PI );
+    var speed = MathUtils.randFloat( 50, 180 );
 
     // init properties
     var p = this.particles[ this.particleIndex ];
     p.time = 0.0;
-    p.timeMax = randFloat( 0.8, 1.5 );
+    p.timeMax = MathUtils.randFloat( 0.8, 1.5 );
     p.dirX = Math.cos(angle) * speed;
     p.dirY = Math.sin(angle) * speed;
     p.posX = posX;
     p.posY = posY;
-    p.radius0 = randFloat( minCanvasWidth*0.01, minCanvasWidth*0.05 );
+    p.radius0 = MathUtils.randFloat( minCanvasWidth*0.01, minCanvasWidth*0.05 );
     p.radius1 = 0.0;
 
     // next index
@@ -153,8 +138,8 @@ define([
       p.posY += p.dirY * dt;
 
       // slow it down
-      p.dirX = lerp(p.dirX, 0.0, 0.02 );
-      p.dirY = lerp(p.dirY, -50.0, 0.01 );
+      p.dirX = MathUtils.lerp(p.dirX, 0.0, 0.02 );
+      p.dirY = MathUtils.lerp(p.dirY, -50.0, 0.01 );
     }
   };
 
@@ -169,7 +154,7 @@ define([
 
       if ( alpha < 1.0 )
       {
-        var radius = lerp( p.radius0, p.radius1, alpha );
+        var radius = MathUtils.lerp( p.radius0, p.radius1, alpha );
         var posX = p.posX;
         var posY = p.posY;
 
@@ -181,7 +166,7 @@ define([
   };
 
   Synth.prototype.setVolume = function(volume) {
-    var vol = lerp( -100, -35, volume );
+    var vol = MathUtils.lerp( -100, -35, volume );
     osc.setVolume(vol);
   }
 
@@ -201,7 +186,7 @@ define([
       this.emitParticleAt( position.x * ctx.canvas.width, position.y * ctx.canvas.height );
     }
 
-    this.volume = lerp( this.volume, 1.0, 0.2 );
+    this.volume = MathUtils.lerp( this.volume, 1.0, 0.2 );
     this.position.x = position.x;
     this.position.y = position.y;
   };
@@ -211,7 +196,7 @@ define([
     this.time += this.dt;
     this.emitTimer -= this.dt;
     this.updateParticles();
-    this.volume = lerp( this.volume, 0.0, 0.02 );
+    this.volume = MathUtils.lerp( this.volume, 0.0, 0.02 );
     this.setVolume(this.volume);
   };
 

@@ -10,6 +10,7 @@ define([
     'hft/gameserver',
     'hft/gamesupport',
     'hft/misc/misc',
+    './mathutils',
     './audioutils',
     'Tone/core/Master',
     'Tone/core/Note',
@@ -17,7 +18,7 @@ define([
     'Tone/source/Oscillator',
     'Tone/component/Envelope',
     'Tone/source/Player',
-  ], function(GameServer, GameSupport, Misc, AudioUtils, Master, Note, Transport, Oscillator, Envelope, Player) {
+  ], function(GameServer, GameSupport, Misc, MathUtils, AudioUtils, Master, Note, Transport, Oscillator, Envelope, Player) {
 
   var audioUtils = new AudioUtils();
   var osc = new Oscillator(440, "square");
@@ -31,18 +32,6 @@ define([
 
   var canvas = document.getElementById("playfield");
   var ctx = canvas.getContext("2d");
-
-  var lerp = function(start, end, alpha) {
-    return start + (end-start) * alpha;
-  };
-
-  var smoothstep = function(edge0, edge1, x)
-  {
-      // Scale, bias and saturate x to 0..1 range
-      x = Math.min(Math.max((x - edge0)/(edge1 - edge0), 0.0), 1.0); 
-      // Evaluate polynomial
-      return x*x*(3 - 2*x);
-  }
 
   ////////////////////////////////
 
@@ -89,7 +78,7 @@ define([
 
   Drummer.prototype.update = function() {
      for ( var i = 0; i < this.notePulsate.length; i+=1 )
-        this.notePulsate[i] = lerp( this.notePulsate[i], 0.0, 0.1 );
+        this.notePulsate[i] = MathUtils.lerp( this.notePulsate[i], 0.0, 0.1 );
   };
 
   Drummer.prototype.draw = function() {
@@ -155,11 +144,11 @@ define([
       var numLines = 8;
       var deltaAngle = 2.0 * Math.PI / numLines;
 
-      var radius0 = minCanvasWidth * lerp( 0.45, 0.4, alpha );
-      var radius1 = lerp( radius0, radius0*0.6, alpha);
+      var radius0 = minCanvasWidth * MathUtils.lerp( 0.45, 0.4, alpha );
+      var radius1 = MathUtils.lerp( radius0, radius0*0.6, alpha);
 
       ctx.strokeStyle = 'black';
-      ctx.lineWidth = minCanvasWidth * lerp( 0.02, 0.05, alpha );
+      ctx.lineWidth = minCanvasWidth * MathUtils.lerp( 0.02, 0.05, alpha );
       
       for ( var i = 0; i < numLines; i+=1 )
       {

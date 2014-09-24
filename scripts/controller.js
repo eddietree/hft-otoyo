@@ -60,7 +60,7 @@ requirejs([
       button.index = i;
       button.style.cursor = "pointer";
 
-      button.addEventListener("mousedown", function(event) {
+      button.addEventListener("pointerdown", function(event) {
         var index = this.index;
         client.sendCmd('bassist-hit', {
           index: index
@@ -88,7 +88,7 @@ requirejs([
       button.index = i;
       button.style.cursor = "pointer";
 
-      button.addEventListener("mousedown", function(event) {
+      button.addEventListener("pointerdown", function(event) {
         var index = this.index;
         client.sendCmd('drummer-hit', {
           index: index
