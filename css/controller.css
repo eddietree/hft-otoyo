@@ -23,6 +23,11 @@ ul#bassist-buttons
     margin: 0 auto;
     padding: 2em 0;
     width: 70%;
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .bassist-button
@@ -31,8 +36,8 @@ ul#bassist-buttons
     text-align: center;
     background-color: #018A8B;
     border-bottom: 10px solid #1D0B31;
-    padding: 1em;
-    margin-bottom: 2em;
+    padding: 1.5em;
+    margin: 1em 0;
 }
 
 .bassist-button:hover
