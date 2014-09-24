@@ -214,13 +214,20 @@ define([
     var posY = this.position.y * ctx.canvas.height;
     var minCanvasWidth = Math.min( ctx.canvas.width, ctx.canvas.height );
 
-    var radius = minCanvasWidth * (0.03 +  (1.0 - this.volume)*0.2 );
+    var radiusOuter = minCanvasWidth * (0.03 +  (1.0 - this.volume)*0.2 );
+    var radiusInner = minCanvasWidth * (0.03) * this.volume;
 
     ctx.beginPath();
-    ctx.arc(posX, posY, radius, 0, 2 * Math.PI, false );
+    ctx.arc(posX, posY, radiusOuter, 0, 2 * Math.PI, false );
     ctx.strokeStyle = 'white';
+   
     ctx.lineWidth = minCanvasWidth * 0.07 * Math.pow(this.volume,3.0);
     ctx.stroke();
+
+    ctx.beginPath();
+    ctx.arc(posX, posY, radiusInner, 0, 2 * Math.PI, false );
+    ctx.fillStyle = "#FFA100";
+    ctx.fill();
   };
 
   return Synth;
