@@ -138,6 +138,9 @@ ul#drummer-buttons
     margin: auto auto;
     vertical-align: middle;
     text-align: center;
+    color: white;
+
+    background-image: url('../img/synth-bg.png');
 }
 
 #synth-input-pad p
@@ -150,11 +153,6 @@ ul#drummer-buttons
     font-size: 2em;
 }
 
-#synth-input-pad:hover {
-    background-color: white;
-}
-
-
 /************ FULLROOM ***********/
 
 #fullroom {
@@ -163,7 +161,7 @@ ul#drummer-buttons
     display: none;
     width: 100%;
     height: 100%;
-    background-color: #1D0B31;
+    background-color: #018A8B;
     color: white;
     text-align: center;
 }
