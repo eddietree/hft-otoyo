@@ -65,6 +65,8 @@ define([
       this.samples[i].stop();
       this.samples[i].dispose();
     }
+
+    this.samples = null;
   };
 
   Drummer.prototype.onHit = function(cmd) {

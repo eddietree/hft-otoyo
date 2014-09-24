@@ -37,11 +37,11 @@ define([
     this.osc = new Oscillator(440, "sine");
 
     // feedback
-    var feedbackDelay = new PingPongDelay("8n");
-    feedbackDelay.setFeedback(0.7);
-    this.osc.connect(feedbackDelay);
-    feedbackDelay.toMaster(); 
-    feedbackDelay.setWet(0.5);  
+    this.feedbackDelay = new PingPongDelay("8n");
+    this.feedbackDelay.setFeedback(0.7);
+    this.osc.connect(this.feedbackDelay);
+    this.feedbackDelay.toMaster(); 
+    this.feedbackDelay.setWet(0.5);  
 
     this.osc.toMaster();
     this.osc.start();
@@ -171,6 +171,12 @@ define([
   Synth.prototype.release = function() {
     Transport.clearInterval( this.transportId );
     
+    // feedback
+    this.feedbackDelay.dispose();
+    this.feedbackDelay = null;
+
+    // osc
+    this.osc.disconnect();
     this.osc.stop();
     this.osc.dispose();
     this.osc = null;
