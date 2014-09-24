@@ -85,6 +85,15 @@ ul#drummer-buttons
     background-color: #F8CC8A;
 }
 
+.drummer-button p 
+{
+    margin: 0;
+    padding:0;
+    height: 100%;
+    position: relative;
+    top: 45%;
+}
+
 .drummer-button:active
 {
     background-color: #1D0B31;
