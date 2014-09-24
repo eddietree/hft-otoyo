@@ -100,6 +100,9 @@ define([
 
     this.time += 1.0/60.0;
 
+    if ( this.volume < 0.01 )
+      return;
+
     var posX = this.position.x * ctx.canvas.width;
     var posY = this.position.y * ctx.canvas.height;
     var minCanvasWidth = Math.min( ctx.canvas.width, ctx.canvas.height );

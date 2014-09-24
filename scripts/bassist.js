@@ -16,15 +16,29 @@ define([
     'Tone/core/Transport',
     'Tone/source/Oscillator',
     'Tone/component/Envelope',
-  ], function(GameServer, GameSupport, Misc, AudioUtils, Master, Note, Transport, Oscillator, Envelope) {
+    'Tone/effect/FeedbackDelay',
+    'Tone/effect/BitCrusher',
+  ], function(GameServer, GameSupport, Misc, AudioUtils, Master, Note, Transport, Oscillator, Envelope, FeedbackDelay, BitCrusher) {
 
   var audioUtils = new AudioUtils();
   var osc = audioUtils.osc;
   osc.setType("triangle");
 
+/*   // feedback
+  var feedbackDelay = new FeedbackDelay("4n");
+  feedbackDelay.setFeedback(0.7);
+  osc.connect(feedbackDelay);
+  feedbackDelay.toMaster(); 
+  feedbackDelay.setWet(0.5);  */
+
    // envelope
-  var env = new Envelope(0.5, 0.5, 0.1, 1.2);
+  var env = new Envelope(0.2, 0.5, 0.1, 1.5);
   env.connect(osc.output.gain);
+
+  /*// crusher
+  var crusher = new BitCrusher(5);
+  osc.connect(crusher);
+  crusher.toMaster();*/
 
   osc.toMaster();
   osc.start();
